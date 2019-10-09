@@ -1,0 +1,115 @@
+
+
+<div class="" style="display: inline;">
+  
+
+    <div class="card-header" style="text-align: center;font-size:22px;" >
+      Informacoes da Nota ! 
+    </div>
+  <div style="display: block" class="mt-4">
+        <div class="alert alert-info" style="text-align:center;width: 500px;font-size: 12px;">
+          <h4>N.º da Nota : {{NovaNota.numeroNota}} </h4>
+        </div>
+      
+        <div class="alert alert-info" style="text-align:center;width: 490px;position:relative; left:400px;top : -78px;font-size: 12px;">
+          <h4>Quantidade de Itens : {{NovaNota.quantidadeDeItens}} </h4>
+        </div>
+
+        <div class="alert alert-info" style="text-align:center;width: 500px;position:relative; left:800px;top : -156px;font-size: 12px;">
+          <h4>Nome do Fornecedor : {{NovaNota.nomeFornecedor}} </h4>
+        </div>  
+
+  </div>
+
+</div>
+
+
+
+
+
+<div class="container  mt-4" style="width: 120px;margin-left : -25px;margin-top: -150px;">
+
+        <table class="table col-md-3"  style="text-align: center;width:100%;margin-top: -150px;">
+        <thead class="thead-dark" >
+            <tr>
+            <th scope="col">Nome </th>
+            <th scope="col">Descricao</th>
+            <th scope="col">Referencia</th>
+            <th scope="col">Cor</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Valor de Compra</th>
+            <th scope="col">Valor de Venda</th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+              <div class="response"></div>
+            
+
+
+        </tbody>
+        </table>
+        
+
+        <script>
+
+        $(document).ready(()=>{
+          const Formulario = document.getElementsByClassName("Form1")
+          const QuantidadeDeItens = {{NovaNota.quantidadeDeItens}};
+          for(var i = 1 ; ;i++){
+
+            if(i > QuantidadeDeItens){break;}
+
+
+
+            const formularioDeCadastroDeItem = '<tr><form class="Form1" id="form'+i+'" action="/admin/lancarProdutoEmNota/enterone" method="POST" ><td><input id="nomeProduto" type="text" name="nomeProduto" placeholder="Nome Produto" style="width: 155px;text-align:center;"></td><td><input id="descProduto" type="text" placeholder="Descricao" style="width: 155px;text-align:center;"></td><td><input id="refProduto" type="text" placeholder="Referencia" style="width: 120px;text-align:center;"></td><td><input id="corProduto" type="text" placeholder="Cor" style="width: 120px;text-align:center;"></td><td><input type="number" id="quantidadeProduto" placeholder="QTD" style="width: 100px;text-align:center;"></td><td><input type="text" id="categoriaProduto" placeholder="Categoria" style="width: 155px;text-align:center;"></td><td><input id="valorCompra"  type="text" placeholder="ValorCompra" style="width: 120px;text-align:center;"></td><td><input type="text" id="valorVenda" placeholder="ValorVenda" style="width: 120px;text-align:center;"></td><td><button id="btnEnviar" type="submit" class="btn btn-success">✓</button></td></form></tr>';
+            
+            $("#tbody").append(formularioDeCadastroDeItem)
+
+
+
+
+
+
+
+
+          }
+
+
+
+
+        function click(){
+          alert("PKSLPOEPOSKES")
+        }
+
+
+
+        })
+
+
+
+          $(document).on('click', '#btnEnviar', function(){
+
+          $(".Form1").submit();
+
+
+      /*
+          console.log(document.getElementById("nomeProduto").value)
+          console.log(document.getElementById("descProduto").value)
+          console.log(document.getElementById("refProduto").value)
+          console.log(document.getElementById("corProduto").value)
+          console.log(document.getElementById("quantidadeProduto").value)
+          console.log(document.getElementById("categoriaProduto").value)
+          console.log(document.getElementById("valorCompra").value)
+          console.log(document.getElementById("valorVenda").value)
+*/
+
+
+          })
+
+
+
+
+   
+        </script>

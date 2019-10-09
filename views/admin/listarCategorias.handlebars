@@ -1,0 +1,65 @@
+
+<table class="table table-light" style="margin-left:-15px;width: 103%;height:102%;border-radius: 10px;">
+     <thead  class=""style="text-align: center;color:black;border-radius:10px;">
+        <tr>
+         <th>Nome da Categoria</th>
+         <th>Descricao da Categoria</th>
+         <th>Data Criacao</th>
+         <th></th>
+        </tr>
+     </thead>
+   <tbody class="" style="text-align : center;">
+
+        {{#each categoria}}
+
+         <tr>
+            <th scope="row">{{name}}</th>
+            <td>{{desc}}</td>
+            <td>{{dateRegister}}</td>
+            <td><a href="#" class="btn btn-success">Editar</a></td>
+
+            <td>
+               <form action="listarCategoria/deletar" class="formDeletarCategoria" method="POST">
+               <input type="text" hidden="true" name="id" value="{{_id}}">
+               <button type="submit" class="btn btn-danger">Deletar</button>
+               </form>
+            </td>
+         </tr>
+
+        {{/each}}
+   </tbody>
+</table>
+
+
+
+
+<script>
+
+   $(".formDeletarCategoria").submit(function(event){
+
+      event.preventDefault();
+
+            Swal.fire({
+            title: 'Tem Certeza?',
+            text: "Voce esta Prestes a Deletar a Categoria",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim'
+            }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                'Deletado',
+                'Categoria Deletada com Sucesso ! ',
+                'success'
+                ).then((result)=>{
+                 this.submit()
+                })
+
+            } // Fim IF
+
+            })//Fim do Then
+
+   })
+</script>

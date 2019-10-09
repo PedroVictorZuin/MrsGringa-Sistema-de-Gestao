@@ -1,0 +1,50 @@
+
+
+   <script type="text/javascript" src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+   <script type="text/javascript" src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
+
+
+
+    <div id="dialog"  style="height: 500px;">
+
+
+        <div id="dialog" style="background-color:#DCDCDC;position: relative;top:45px;border-radius:10px;">
+            
+            <div class="card-body" id="dialog" >
+
+                <form action="cadastroCategoria/new"  id="formCadastroCategoria" class="" method="POST" style="position:relative;top:15px;">
+
+                    <strong align="center"><h2 class="">Preencha os Campos para Cadastrar Uma Categoria</h2></strong><br>
+                    <label for="" class="mt-2">Nome Categoria</label><br>
+                    <input type="text" class="form-control mt-2" name="categoryName" placeholder="Digite o Nome da Categoria" required="required" id="">
+                    <label for="" class="mt-2">Descricao Categoria</label><br>
+                    <input type="text" class="form-control mt-2" name="categoryDesc" placeholder="Digite a Descricao da Categoria"  required="required" id="">
+                    <button type="submit" class="btn btn-success mt-4">Cadastrar</button>
+                    <button type="reset" id="btnCancelar" class="btn btn-danger mt-4">Cancelar</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script>
+    $("#formCadastroCategoria").submit(function(event){
+        event.preventDefault()
+        Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'Categoria Cadastrada com Sucesso',
+        text : "Aguarde o Redirecionamento ...",
+        showConfirmButton: false,
+        timer: 2000
+        }).then((event)=>{
+            this.submit();
+        })
+    })
+</script>
+

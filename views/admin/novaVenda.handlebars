@@ -1,0 +1,107 @@
+<style>
+
+</style>
+
+
+
+
+<div class="container" style="height: 560px;margin-top:-25px;">
+
+<div>
+
+          <div>
+
+                    <div class=""  style="width: 200px;margin-left: -100px;background-color: gainsboro;padding-top:25px;border-radius : 10px;margin-top:20px;">
+
+                      <form action="/novaVenda/addProduct" style="height: 90px;text-align:center;width: 200px;">
+                      <label for="Referencia">Referencia</label>
+                      <input type="text" name="referenceProduct" id="referenceProduct" class="form-control" style="width: 200px;">
+                      <input type="submit" hidden value="">
+
+                      </form>
+
+                  </div>
+
+            <div class="menuHorinzontal" style="text-align:center;background-color:#F6CEF5;margin-left:-100px;width: 200px;height: 400px;">
+
+              <form action="/novaVenda/finalizaVenda" method="POST" class="mt-4">
+              <label for="Valor Total">Sub Total</label>
+              <input type="text" name="subTotal" id="" class="form-control mt-2" style="width: 200px;">
+              <label for="Desconto">Desconto</label>
+              <input type="text" name="desconto" id="" class="form-control mt-2" style="width: 200px;">
+              <label for="Valor Total">Cliente</label>
+              <select name="clientes" id="" class="form form-control" style="width: 200px;text-align:center;">
+                <option value="Nivalda" style="text-align: center;">Nivalda</option>
+                <option value="Nivalda"style="text-align: center;">Camargo</option>
+                <option value="Nivalda"style="text-align: center;">Cleita</option>
+                <option value="Nivalda"style="text-align: center;">Bruna</option>
+              </select>
+              <label for="Valor Total"></label>
+              <input type="text" name="valorTotal" id="" class="form-control mt-2" style="width: 200px;">
+              </form>
+
+            </div>
+
+                  
+          </div>
+
+
+          <!--Inicio Div Da Tabela-->
+<div style="margin-left:130px;margin-top:-520px;width: 1050px;">
+            <table class="table table-light" id="myTable" style="margin-left:-15px;width: 102%;height:102%;border-radius: 10px;">
+            <h2 style="text-align: center; margin-top : 15px;" class="alert alert-success">Caixa Disponivel - Nova Venda</h2>
+
+            <thead  class=""style="text-align: center;color:black;border-radius:10px;">
+                <tr>
+                <th>Nome</th>
+                <th>Descricao</th>
+                <th>Referencia</th>
+                <th>Quantidade</th>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <th></th>
+                </tr>
+            </thead>
+        <tbody class="" style="text-align : center;">
+
+
+           
+                    <tr>
+                        <th scope="row"><!--NomeProduto--></th>
+                        <td><!--Desc Produto--></td>
+                        <td name=""><!--Referencia--></td>
+                        <td><!--Quantidade--></td>
+                        <td><!--Categoria--> Un.</td>
+                        <td><!--Valor--></td>
+                        <td><!--SubTotal--></td>
+                        <td><!--Total--></td>
+
+                    </tr>
+
+                   
+        </tbody> 
+        </table>
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+</div>
+
+<script>
+
+$(document).ready(()=>{
+  $("#referenceProduct").focus()
+
+
+})
+
+
+</script>

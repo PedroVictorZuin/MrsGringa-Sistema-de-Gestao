@@ -1,0 +1,94 @@
+
+<div style="height: 550px;">
+
+    <hr class="">
+    <form action="" method="POST" class="" style="text-align: center; background-color:#D3D3D3;padding : 25px;">
+            <h4 class="mt-1" style="text-align: center;margin-top:-20px;color:#1C1C1C;">Informacoes do Produto </h4>
+    <div class="form-row">
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Nome</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.name}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Descricao</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.desc}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Referencia</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.reference}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Cor</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.color}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Quantidade</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.quantity}}">
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Categoria</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.category.name}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Valor de Compra</label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="$ {{produto.buyValue}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Valor de Venda </label>
+            <input type="text" class="form-control" style="text-align: center;" readonly value="$ {{produto.sellValue}}">
+        </div>
+        
+    </div>
+    <hr style="background-color: 	#696969;margin-top:25px;">
+            <h4 class="mt-2" style="text-align: center;margin-top:-20px;color:#1C1C1C;">Preencha as informacoes de Saida do Produto</h4>
+    <div class="form-row" style="text-align: center;">
+
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Selecione o Motivo da Saida do Produto</label>
+            <select class="form-control" style="text-align: center;">
+            <option value="Venda">Venda</option>
+            <option value="Venda">Devolucao</option>
+            <option value="Venda">Defeito</option>
+            </select>
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Valor de Compra</label>
+            <input type="text" class="form-control" style="text-align: center;" value="$ {{produto.buyValue}}">
+        </div>
+        <div class="col" style="text-align: center;">
+            <label for="refenrece" class="mt-4">Valor de Venda </label>
+            <input type="text" class="form-control" style="text-align: center;" value="$ {{produto.sellValue}}">
+        </div>
+
+
+    </div>
+    </form>
+
+</div>
+
+
+
+
+<script>
+
+$(document).ready(function(){
+
+        /*
+        Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'Pagina Carregada Com Sucesso !',
+        showConfirmButton: false,
+        timer: 1500
+        })
+
+        */
+
+
+})
+
+</script>

@@ -1,0 +1,70 @@
+<div class="mt-5" style="height: 485px;"   >
+    
+
+    <div class="col-md-3">
+        <form action="entradaemProdutos/new" method="POST" class="form-control" style="width: 103%;height:500px;margin-top: -10px;text-align:center;margin-left: -28px;border-radius:0 0 10 10px;" method="POST">
+                <label for="referencia" style="text-align: center;">Referencia do Produto</label><br>
+                <input class="form form-control-sm col-md-12" name="referenciaProduto" type="text"> <br>
+                <br>
+                <label for="Ou">Ou</label>
+            <br>
+                <label for="nome" style="text-align: center;">Nome do Produto</label><br>
+                <input class="form form-control-sm col-md-12" name="nomeProduto" type="text"> <br>
+            <button type="submit" class="btn btn-outline-success mt-2">Encontrar</button>   
+        
+        </form>
+
+
+    </div>
+
+
+    <div class="col-md-3" style="position: relative;top: -500px;left : 345px;width: 800px; ">
+        <h2 style="text-align: center;"></h2>
+    
+        <table class="table table-light" style="margin-left:-50px;width: 1021px ;height:102%;border-radius: 10px;">
+            <thead  class=""style="text-align: center;color:black;border-radius:10px;">
+                <tr>
+                <th>Nome</th>
+                <th>Descricao</th>
+                <th>Referencia</th>
+                <th>Cor</th>
+                <th>Quantidade</th>
+                <th>Categoria</th>
+                <th>Valor de Compra</th>
+                <th>Valor de Venda</th>
+                </tr>
+            </thead>
+        <tbody class="" style="text-align : center;">
+
+            
+
+                <tr>
+                    <th scope="row">{{name}}</th>
+                    <td>{{desc  }}</td>
+                    <td>{{reference}}</td>
+                    <td>{{color}}</td>
+                    <td><input type="number" class="" value="{{quantity}}" style="text-align: center;width: 86px;" name="number" id=""></td>
+                    <td>{{category.name}}</td>
+                    <td>{{buyValue}}</td>
+                    <td>{{sellValue}}</td>
+                </tr>
+            
+
+            
+        </tbody> 
+        </table>
+
+
+        <button class="btn btn-success col-md-12" onclick="alerta()">Dar entrada em Produto</button>
+    </div>
+
+
+
+</div>
+<hr>
+
+<script>
+
+
+
+</script>

@@ -1,0 +1,57 @@
+
+
+<form action="/admin/lancarProdutoEmNota/success" class="FormControleDeNota" method="POST">
+    <input type="text" id="NumeroDaNota" hidden name="NumeroDaNota" value="" id="">
+    <input type="text" id="QuantidadeDeItens" hidden name="QuantidadeDeItens" value="" id="">
+    <input type="text" id="NomeFornecedor"  name="NomeFornecedor" hidden value="" id="">
+</form>
+
+
+
+
+<script>
+    $(document).ready(function(){
+
+var NomeFornecedor
+var QuantidadeDeItens
+var NumeroDaNota
+
+        Swal.mixin({
+            input: 'text',
+            confirmButtonText: 'Proxima',
+            showCancelButton: true,
+            progressSteps: ['1', '2', '3']
+        }).queue([
+            {
+                title: 'Precisamos de algumas Informacoes sobre a Nota',
+                text: 'Informe o Numero da Nota !'
+            },
+            'Informe a Quantidade de Produtos da Nota',
+            'Informe o Nome do Fornecedor '
+        ]).then((result) => {
+            if (result.value) {
+                Swal.fire({
+                    title: 'Feito ! ',
+                    text: "Aguarde o Redirecionamento"
+                })
+                        NumeroDaNota = result.value[0]
+                        QuantidadeDeItens = result.value[1]
+                        NomeFornecedor = result.value[2]
+
+                        document.getElementById("NumeroDaNota").value = NumeroDaNota
+                        document.getElementById("QuantidadeDeItens").value = QuantidadeDeItens
+                        document.getElementById("NomeFornecedor").value = NomeFornecedor
+
+                        $(".FormControleDeNota").submit()
+
+            }
+        })
+
+
+
+
+
+
+
+    })
+</script>

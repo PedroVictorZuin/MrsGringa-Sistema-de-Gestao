@@ -1,0 +1,98 @@
+<div class="mt-5" style="height: 485px;"   >
+    
+
+    <div class="col-md-3">
+        <form action="admin/entradaemProdutos/new" class="form-control" style="width: 103%;height:500px;margin-top: -10px;text-align:center;margin-left: -28px;border-radius:0 0 10 10px;" method="POST">
+                <label for="referencia" style="text-align: center;">Referencia do Produto</label><br>
+                <input class="form form-control-sm col-md-12" type="text"> <br>
+                <br>
+                <label for="Ou">Ou</label>
+            <br>
+                <label for="referencia" style="text-align: center;">Nome do Produto</label><br>
+                <input class="form form-control-sm col-md-12" type="text"> <br>
+            <button type="submit" class="btn btn-outline-success mt-2">Encontrar</button>
+        
+        </form>
+
+
+    </div>
+
+
+    <div class="col-md-3" style="position: relative;top: -500px;left : 345px;width: 800px; ">
+        <h2 style="text-align: center;"></h2>
+    
+        <table class="table table-light" style="margin-left:-50px;width: 1021px ;height:102%;border-radius: 10px;">
+            <thead  class="mt-4"style="text-align: center;color:black;border-radius:10px;">
+                <tr>
+                <th>Nome</th>
+                <th>Descricao</th>
+                <th>Referencia</th>
+                <th>Cor</th>
+                <th>Quantidade</th>
+                <th>Categoria</th>
+                <th>Valor de Compra</th>
+                <th>Valor de Venda</th>
+                </tr>
+            </thead>
+        <tbody class="mt-4" style="text-align : center;">
+
+            
+
+                <tr>
+                    <th scope="row">{{produto.name}}</th>
+                    <td>{{produto.desc}}</td>
+                    <td>{{produto.reference}}</td>
+                    <td>{{produto.color}}</td>
+                        <td><input type="number" readonly="true" class="" value="{{produto.quantity}}" style="text-align: center;width: 86px;" name="number" id=""></td>
+                    <td>{{produto.category.name}}</td>
+                    <td>{{produto.buyValue}}</td>
+                    <td>{{produto.sellValue}}</td>
+                </tr>
+            
+            
+           
+        </tbody> 
+          <form action="entrada" id="entradaEmProduto" method="POST" class="form form-control-sm">
+              <h4 style="position: relative;left:740px;top:-10;">Quantidade</h4>
+              
+                <input type="number" name="valorAdd"  id="" class="form-control mt-4" style="position:relative;left:660px;top:-25px;">
+                <input type="text" hidden="true" name="idProduto" value="{{produto._id}}" id="">
+                <button type="submit" style="position:relative;top:-15px;left:840px;" class="btn btn-outline-success">Adicionar</button>
+           </form>
+        </table>
+
+
+        <div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+<hr>
+
+<script>
+
+$("#entradaEmProduto").submit(function(event){
+
+    event.preventDefault();
+Swal.fire({
+  position: 'center',
+  type: 'success',
+  title: 'Quantidade Adicionada com Sucesso !',
+  showConfirmButton: false,
+  timer: 1500
+}).then((result)=>{
+        this.submit()   
+    
+})
+    
+
+})
+
+
+</script>

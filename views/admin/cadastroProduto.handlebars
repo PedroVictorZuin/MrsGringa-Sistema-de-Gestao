@@ -1,0 +1,119 @@
+<style>
+    .container {
+        height: 1000px;
+        background-color: none;
+    }
+</style>
+
+<div class="container mt-4" style="height: 500px;">
+
+
+
+    <div class="card mt-4" style="background-color:#DCDCDC;position: relative;top:45px;border-radius:10px;">
+        
+<div class="card-title">
+   <h2 style="text-align: center;" class="mt-4"><strong>Preencha as informacoes para cadastrar o produto</strong></h2>
+</div>
+
+        <div class="card-body" >
+
+            <form action="cadastroProduto/new" id="formCadastroProduto" class="form-row" method="POST" style="position:relative;top:15px;">
+
+                <div class="col-3" style="text-align: center;">
+
+                    <label for="nomeproduto">Nome Do Produto</label>
+                    <input type="text" class="form-control mt-2" name="productName" placeholder="Digite o Nome do Produto" required="required" id="">
+                
+                </div>
+                <div class="col-3" style="text-align: center;">
+                
+                    <label for="desc">Descricao do Produto</label>
+                    <input type="text" class="form-control mt-2" name="productDesc" placeholder="Digite a Descricao do Produto"  required="required" id="">
+               
+                </div>
+                <div class="col-3" style="text-align: center;">
+                    
+                    <label>Referencia</label>
+                    <input type="text" class="form-control mt-2" name="productRef" placeholder="Digite a Referencia"  required="required" id="">
+               
+                </div>
+                <div class="col-3" style="text-align: center;">
+                    <label for="corProduto">Cor Produto</label>
+                    <select name="productColor"  id="" class="form-control mt-2" placeholder="Selecione a Cor do Produto">
+                        <option value="Amarelo">Amarelo</option>
+                        <option value="Preto">Preto</option>
+                        <option value="Vinho">Vinho</option>
+                        <option value="CorPadrao">CorPadrao</option>
+                    </select>
+                </div>
+                <div class="col-3" style="text-align: center;">
+                    <label class="mt-4" for="quantidadedeProduto">Quantidade de Produtos</label>
+                    <input type="text" class="form-control mt-2" name="quantityProduct" placeholder="Digite a Quantidade "  required="required" id="">
+                </div>
+                <div class="col-3" style="text-align: center;">
+                
+                    <label for="categoria" class="mt-4">Categoria</label>
+                    <select name="productCategory" id="" required="true" class="form-control mt-2" placeholder="Selecione a Categoria do Produto">
+                        {{#each categoria}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+
+                </div>
+                <div class="col-3" style="text-align: center;">
+                    <label for="valordecompra" class="mt-4">Valor de Compra</label>
+                    <input type="text" class="dinheiro form-control mt-2" name="buyValue" placeholder="Digite o Valor de Compra "  required="required" id="">
+                </div>
+                <div class="col-3" style="text-align: center;">
+                    <label for="valordevenda" class="mt-4">Valor de Venda</label>
+                    <input type="text" class="dinheiro form-control mt-2" name="sellValue" placeholder="Digite o Valor de Venda "  required="required" id="">
+               </div>
+               
+               <div class="col-3" style="text-align: center;">
+               <button type="submit" class="btn btn-success mt-4">Cadastrar Produto</button>
+               </div> 
+               <div class="col-3" style="text-align: center;">
+                   <button type="reset" class="btn btn-danger mt-4">Cancelar Cadastro</button>
+                </div>
+
+
+   
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>     
+
+<script>
+
+    $("#formCadastroProduto").submit(function(event){
+
+
+
+        event.preventDefault();
+
+        Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'Produto Cadastrado com Sucesso',
+        text : "Aguarde o Redirecionamento ...",
+        showConfirmButton: false,
+        timer: 2000
+        }).then((event)=>{
+            this.submit();
+        })
+
+
+    })
+
+
+
+    $('.telefone').mask('(00) 0 0000-0000');
+    $('.dinheiro').mask('#.##0,00', {reverse: true});
+    $('.estado').mask('AA');
+
+</script>
+
