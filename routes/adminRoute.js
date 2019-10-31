@@ -169,10 +169,9 @@ router.post("/lancarProdutoEmNota/success/onebyone", urlencodedParser , (req,res
 
     const data = req.body;
 
-    console.log(data.name)
+    console.log(data)
 
 })
- 
 
 
 router.post("/listarProdutos/deletar" , (req,res) => {
