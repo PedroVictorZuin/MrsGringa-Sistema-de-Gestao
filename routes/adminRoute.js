@@ -11,6 +11,9 @@ require("../model/NewNote")
 const NovaNota = mongoose.model("note")
 const cors = require("cors")
 const bodyParser = require("body-parser")
+require("../model/SaidaDeProdutoRelatorio")
+const httpmsg = require("http-msgs")
+const SaidaDeUmNovoProduto = mongoose.model("saidadeprodutorelatorio")
 let urlencodedParser = bodyParser.urlencoded({extended:false})
 
 
@@ -90,6 +93,42 @@ router.get("/novaVenda" , (req,res) =>{
 
 
 
+router.post("/listarProdutos/saidadoproduto/exit" , (req,res)=>{
+
+Produto.findOne({reference : req.body.reference}).then((produto)=>{
+
+    const QuantidadeARetirar = req.body.quantidadeARetirar
+
+    produto.quantity = produto.quantity - QuantidadeARetirar
+
+
+    
+    const saidaDeProduto = {
+        referencia : req.body.reference,
+        motivo : req.body.motivoSaida,
+        desc : req.body.descSaida,
+        quantidadeRetirada : QuantidadeARetirar,
+        obs : req.body.obsSaida
+    }
+
+        produto.save().then(()=>{
+        }).catch((err) => {
+            req.flash("error_msg" , "Houve um erro ao Registrar a Saida do Produto" + err)
+            res.redirect("/admin/listarProdutos")
+        })
+
+   new SaidaDeUmNovoProduto(saidaDeProduto).save().then(()=>{
+       res.redirect("/admin/listarProdutos")
+   }).catch((err) =>{
+       req.flash("error_msg" , "Houve um erro ao Registrar o Relatorio de Saida de Produto" + err)
+       res.redirect("/admin/listarProdutos")
+   })
+
+})
+
+})
+
+
 router.post("/listarProdutos/saidadoproduto" , (req,res)=>{
 
     Produto.findOne({reference : req.body.reference}).populate("category").then((produto)=>{
@@ -111,10 +150,29 @@ const Novanota = {
     nomeFornecedor : req.body.NomeFornecedor
 }
 
-        res.render("admin/entradaViaNota" , {NovaNota : Novanota})
-    
+
+Categoria.find().populate("category").sort({date: "desc"}).then((categoria)=>{
+    res.render("admin/entradaViaNota" , {categoria : categoria , NovaNota : Novanota})
+
+
 })
 
+
+})
+
+router.post("/success/ajaxRequest/entradaEmNota", urlencodedParser , (req,res)=>{
+    res.send(req.body.name)
+})
+
+
+router.post("/lancarProdutoEmNota/success/onebyone", urlencodedParser , (req,res)=>{
+
+    const data = req.body;
+
+    console.log(data.name)
+
+})
+ 
 
 
 router.post("/listarProdutos/deletar" , (req,res) => {
@@ -218,6 +276,8 @@ router.post("/cadastroProduto/new" , (req,res,next) =>{
         sellValue : sellValue
     }
 
+
+    
     new Produto(NewProduct).save().then(()=>{
         next
         res.redirect("/admin/listarProdutos")

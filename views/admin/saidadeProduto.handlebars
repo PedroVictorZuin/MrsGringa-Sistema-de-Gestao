@@ -1,8 +1,8 @@
 
-<div style="height: 550px;">
+<div style="height: 750px;">
 
     <hr class="">
-    <form action="" method="POST" class="" style="text-align: center; background-color:#D3D3D3;padding : 25px;">
+    <form action="saidadoproduto/exit" method="POST" class="FormSaidaProduto" name="FormSaidaProduto" style="text-align: center; background-color:#D3D3D3;padding : 25px;">
             <h4 class="mt-1" style="text-align: center;margin-top:-20px;color:#1C1C1C;">Informacoes do Produto </h4>
     <div class="form-row">
         <div class="col" style="text-align: center;">
@@ -15,7 +15,7 @@
         </div>
         <div class="col" style="text-align: center;">
             <label for="refenrece" class="mt-4">Referencia</label>
-            <input type="text" class="form-control" style="text-align: center;" readonly value="{{produto.reference}}">
+            <input type="text" class="form-control" style="text-align: center;" name="reference" readonly value="{{produto.reference}}">
         </div>
         <div class="col" style="text-align: center;">
             <label for="refenrece" class="mt-4">Cor</label>
@@ -49,23 +49,34 @@
 
         <div class="col" style="text-align: center;">
             <label for="refenrece" class="mt-4">Selecione o Motivo da Saida do Produto</label>
-            <select class="form-control" style="text-align: center;">
+            <select class="form-control" name="motivoSaida" style="text-align: center;">
             <option value="Venda">Venda</option>
-            <option value="Venda">Devolucao</option>
-            <option value="Venda">Defeito</option>
+            <option value="Devolucao">Devolucao</option>
+            <option value="Defeito">Defeito</option>
             </select>
         </div>
         <div class="col" style="text-align: center;">
-            <label for="refenrece" class="mt-4">Valor de Compra</label>
-            <input type="text" class="form-control" style="text-align: center;" value="$ {{produto.buyValue}}">
+            <label for="refenrece" class="mt-4">Descricao da Saida</label>
+            <input type="text" class="form-control" name="descSaida" required style="text-align: center;" value="">
         </div>
         <div class="col" style="text-align: center;">
-            <label for="refenrece" class="mt-4">Valor de Venda </label>
-            <input type="text" class="form-control" style="text-align: center;" value="$ {{produto.sellValue}}">
+            <label for="refenrece" class="mt-4">Quantidade a Se Retirar</label>
+            <input type="number" class="form-control" required name="quantidadeARetirar" style="text-align: center;" value="">
         </div>
 
 
     </div>
+     <div class="form-row" style="text-align: center;">
+            <div class="col" style="text-align: center;">
+                <label for="refenrece" class="mt-4">Observacoes de Saida</label>
+                <input type="text" class="form-control" name="obsSaida" required style="text-align: center;" value="">
+                
+            </div>
+     </div>
+     <div class="form-row mt-4" style="text-align: center;align-items: center;">
+         <input type="submit" class="btn btn-outline-success" value="▼ Saida  ">
+         <a href="/admin/listarProdutos" class="btn btn-outline-danger"> × Cancelar</a>
+     </div>
     </form>
 
 </div>
@@ -77,18 +88,8 @@
 
 $(document).ready(function(){
 
-        /*
-        Swal.fire({
-        position: 'center',
-        type: 'success',
-        title: 'Pagina Carregada Com Sucesso !',
-        showConfirmButton: false,
-        timer: 1500
-        })
 
-        */
 
 
 })
-
 </script>

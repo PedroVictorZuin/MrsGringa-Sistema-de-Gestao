@@ -45,8 +45,7 @@
         </thead>
         <tbody id="tbody">
               <div class="response"></div>
-            
-
+ 
 
         </tbody>
         </table>
@@ -63,8 +62,7 @@
 
 
 
-            const formularioDeCadastroDeItem = '<tr><form class="Form1" id="form'+i+'" action="/admin/lancarProdutoEmNota/enterone" method="POST" ><td><input id="nomeProduto" type="text" name="nomeProduto" placeholder="Nome Produto" style="width: 155px;text-align:center;"></td><td><input id="descProduto" type="text" placeholder="Descricao" style="width: 155px;text-align:center;"></td><td><input id="refProduto" type="text" placeholder="Referencia" style="width: 120px;text-align:center;"></td><td><input id="corProduto" type="text" placeholder="Cor" style="width: 120px;text-align:center;"></td><td><input type="number" id="quantidadeProduto" placeholder="QTD" style="width: 100px;text-align:center;"></td><td><input type="text" id="categoriaProduto" placeholder="Categoria" style="width: 155px;text-align:center;"></td><td><input id="valorCompra"  type="text" placeholder="ValorCompra" style="width: 120px;text-align:center;"></td><td><input type="text" id="valorVenda" placeholder="ValorVenda" style="width: 120px;text-align:center;"></td><td><button id="btnEnviar" type="submit" class="btn btn-success">✓</button></td></form></tr>';
-            
+            const formularioDeCadastroDeItem =  '<tr><form class="Form1" id="form1" action="#" method="POST" ><td><input id="nomeProduto" type="text" name="nomeProduto" placeholder="Nome Produto" style="width: 155px;text-align:center;"></td><td><input id="descProduto" type="text" placeholder="Descricao" style="width: 155px;text-align:center;"></td><td><input id="refProduto" type="text" placeholder="Referencia" style="width: 120px;text-align:center;"></td><td><input id="corProduto" type="text" placeholder="Cor" style="width: 120px;text-align:center;"></td><td><input type="number" id="quantidadeProduto" placeholder="QTD" style="width: 100px;text-align:center;"></td><td><select name="productCategory" id="categoriaProduto" style="width: 180px;height : 35px;margin-top:-2px;" required="true" class="form-control" placeholder="Selecione a Categoria do Produto">{{#each categoria}}<option id="{{name}}" value="{{name}}">{{name}}</option>     {{/each}}</select></td><td><input id="valorCompra"  type="text" placeholder="ValorCompra" style="width: 120px;text-align:center;"></td><td><input type="text" id="valorVenda" placeholder="ValorVenda" style="width: 120px;text-align:center;"></td><td><button id="btnEnviar" type="submit" class="btn btn-success">✓</button></td></form></tr>';
             $("#tbody").append(formularioDeCadastroDeItem)
 
 
@@ -85,31 +83,41 @@
 
 
 
+            $(document).on('click', '#btnEnviar', function(){
+
+
+              let Product1 = {
+                name : document.getElementById("nomeProduto").value,
+                desc : document.getElementById("descProduto").value,
+                ref : document.getElementById("refProduto").value,
+                color : document.getElementById("corProduto").value,
+                qtd : document.getElementById("quantidadeProduto").value,
+                category : document.getElementById("categoriaProduto").value,
+                buyValue : document.getElementById("valorCompra").value,
+                saleValue : document.getElementById("valorVenda").value
+              }
+
+              $.ajax({
+              url : "http://localhost:8081/admin/lancarProdutoEmNota/success/onebyone",
+              type : "POST",
+              data : Product1,
+              success : (data)=>{
+                console.log("Success " + data)
+              },
+              error : (err)=>{
+                console.log("Error " + err)
+              }
+              })
+
+  
         })
 
 
 
-          $(document).on('click', '#btnEnviar', function(){
-
-          $(".Form1").submit();
-
-
-      /*
-          console.log(document.getElementById("nomeProduto").value)
-          console.log(document.getElementById("descProduto").value)
-          console.log(document.getElementById("refProduto").value)
-          console.log(document.getElementById("corProduto").value)
-          console.log(document.getElementById("quantidadeProduto").value)
-          console.log(document.getElementById("categoriaProduto").value)
-          console.log(document.getElementById("valorCompra").value)
-          console.log(document.getElementById("valorVenda").value)
-*/
+      
 
 
           })
 
 
-
-
-   
         </script>

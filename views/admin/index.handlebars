@@ -3,15 +3,102 @@
   .containerHome {
     width: 1315px;
     height: 400px;
-    background-color:#FFF;
+    background-color:#FAF0E6;
     border-radius: 10px;
   }
 
-  .menu2{
-    position: relative;
-    top: 10px;
-    left: 400px;
+
+#ReportSalaPrincipal{
+  width:900px;
+  display: none;
+  position:relative; 
+  left:27%; top: -111% ; 
+  background-color:#2F4F4F ; 
+  color:white;
+  border-radius: 10px;
+  padding: 10px;
+  animation: fadeIn 1s;
+  height: 390px;
   }
+
+
+#MenuSalaPrincipal{
+  width:900px;
+  display: none;
+  position:relative; 
+  left:27%; top: -105% ; 
+  background-color:#2F4F4F ; 
+  color:white;
+  border-radius: 10px;
+  padding: 10px;
+  animation: fadeIn 1s;
+  height: 150px;
+  }
+  #MenuSalaPrincipal:hover{
+  }
+
+
+  #MenuSalaPrincipal ul{
+        list-style: none;
+        padding: 5px;
+        margin-top: 10px;
+        display: inline;
+        
+  }
+  
+    #MenuSalaPrincipal li a{
+    color: #FFFACD;
+    font-size: 13px;
+    font-family: 'Century Gothic';
+    padding: 5px;
+    height: 40px;
+    text-decoration:none;
+    background: #2F4F4F;
+    border: none;
+  }
+     #MenuSalaPrincipal li a:hover{
+    color: #00FF7F;
+    font-family: 'Century Gothic';
+    padding: 5px;
+    text-decoration:none;
+  }
+
+
+@keyframes fadeIn{
+  from {
+    opacity: 0;
+    border: none;
+    left: 100px;
+  }
+  to {
+    opacity: 1;
+    background-color: #2F4F4F;
+    left: 27%;
+  }
+
+}
+
+
+@keyframes borderYes { 
+  from {
+    border: none;
+  }
+  to{
+   border: #B0C4DE solid 3px;
+  }
+}
+@keyframes fadeOut{
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+
+}
+
+
+
 </style>
 
 
@@ -20,11 +107,92 @@
 <div class="jumbotron">
   <h1 class="display-4">Mrs.Gringa </h1>
   <p class="lead"> Sua Gestao Mais Inteligente ✓</p>
-  <hr class="my-4">
   <p></p>
   <a class="btn btn-primary btn-lg" href="#" role="button">Login</a>
   <a class="btn btn-primary btn-lg" href="#" role="button">Cadastre-Se</a>
 </div>
 
+
+
+
+
+
+<div style="position:relative;left:97%;top:-78%;">
+
+  <a href=""><img id="BotaoExibeQuick"  src="https://image.flaticon.com/icons/svg/122/122631.svg" width="48px" height="48px" alt=""></a><br>
+  <a href=""><img id="BotaoExibeReport" class="mt-4" width="48" height="48"  src="https://image.flaticon.com/icons/svg/1152/1152850.svg" alt=""></a><br>
 </div>
 
+
+<div id="MenuSalaPrincipal">
+
+<ul>
+  <strong><label for="Quick Access">Quick Access</label></strong>
+  <hr style="background-color: #FFFACD; ">
+  <li><a class="btn btn-dark" href="/admin/cadastroProduto "><img width="24px" height="24px" src="https://image.flaticon.com/icons/svg/179/179402.svg" alt="">  Cadastro de Produtos </a>
+  <a class="btn btn-dark"  href="/admin/entradaEmNota"><img width="24px" height="24px" src="https://image.flaticon.com/icons/svg/2188/2188314.svg" alt=""> Entrada Via Nota</a>
+  <a class="btn btn-dark"href="/admin/listarProdutos"><img width="24px" height="24px" src="https://image.flaticon.com/icons/svg/1857/1857056.svg" alt=""> Listagem de Produtos</a>
+  <a class="btn btn-dark"href=""> <img width="24px" height="24px"src="https://image.flaticon.com/icons/svg/1605/1605350.svg" alt=""> Listagem de Clientes</a>
+  <a class="btn btn-dark"href=""> <img width="24px" height="24px" src="https://image.flaticon.com/icons/svg/950/950576.svg" alt=""> Listagem de Vendas</a></li>
+  <hr style="background-color: #FFFACD; ">
+</ul>
+</div>
+
+<div id="ReportSalaPrincipal">
+
+<div>
+
+<label for="Report" style="text-align: center;">Produtos</label><br>
+
+<img width="300px" height="300px" src="https://static.todamateria.com.br/upload/gr/af/grafico_ibge_1.jpg" alt="">
+
+</div>
+
+<div style="position: relative;left:500px;top:-89%;">
+
+<label for="Report" style="text-align: center;">Vendas</label><br>
+
+<img width="300px" height="300px" src="https://static.todamateria.com.br/upload/gr/af/grafico_ibge_1.jpg" alt="">
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+<script>
+
+
+
+$("#BotaoExibeQuick").click((event)=>{
+
+event.preventDefault()
+
+if(document.getElementById("MenuSalaPrincipal").style.display == 'block'){
+  document.getElementById("MenuSalaPrincipal").style.display = 'none'
+}
+else
+{document.getElementById("MenuSalaPrincipal").style.display = 'block'}})
+
+
+
+
+
+
+
+
+$("#BotaoExibeReport").click((event)=>{
+event.preventDefault()
+
+if(document.getElementById("ReportSalaPrincipal").style.display == 'block' ){
+  document.getElementById("ReportSalaPrincipal").style.display = 'none'
+}
+else
+{document.getElementById("ReportSalaPrincipal").style.display = 'block'}})
+
+
+</script>

@@ -18,6 +18,9 @@ const flash = require('connect-flash')
 
 // Configs
 
+
+
+
             // Body Parser 
                 app.use(bodyParser.urlencoded({extended: true}))
                 app.use(bodyParser.json())
@@ -90,7 +93,16 @@ const flash = require('connect-flash')
 // Routes 
 
     //  Get Routes 
+
+
+    app.get("/" , (req,res)=>{
+        res.render("public/index.html")
+    })
+
+
+
       app.use("/admin" , adminRoute)
+
 
 
     // End Get Routes
@@ -104,6 +116,8 @@ const flash = require('connect-flash')
 
     const PORT = 8081
     app.listen(PORT , (req,res) => {
+        console.log("[Starting Host . ]")
+        console.log("[Starting Host .. ]")
         console.log("[Starting Host ... ]")
         console.log("[Host Loaded]")
     })

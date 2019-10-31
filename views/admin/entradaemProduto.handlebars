@@ -4,7 +4,7 @@
     <div class="col-md-3">
         <form action="entradaemProdutos/new" method="POST" class="form-control" style="width: 103%;height:500px;margin-top: -10px;text-align:center;margin-left: -28px;border-radius:0 0 10 10px;" method="POST">
                 <label for="referencia" style="text-align: center;">Referencia do Produto</label><br>
-                <input class="form form-control-sm col-md-12" name="referenciaProduto" type="text"> <br>
+                <input class="form form-control-sm col-md-12" id="referenciaProduto" name="referenciaProduto" type="text"> <br>
                 <br>
                 <label for="Ou">Ou</label>
             <br>
@@ -55,7 +55,6 @@
         </table>
 
 
-        <button class="btn btn-success col-md-12" onclick="alerta()">Dar entrada em Produto</button>
     </div>
 
 
@@ -64,6 +63,12 @@
 <hr>
 
 <script>
+
+$(document).ready(()=>{
+
+$("#referenciaProduto").focus()
+
+})
 
 
 
