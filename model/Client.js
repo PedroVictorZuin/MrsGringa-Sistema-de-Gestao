@@ -2,36 +2,34 @@ const express = require('express')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const Client = {
-    name = {
-        required : true,
-        type : String,
-    },
+let Client = {
 
-    lastName = {
-        required : true,
+    name : {
+        type: String,
+        required : true
+    },
+    otherName : {
+        type: String,
+        required : true
+    },
+    cpfClient : {
         type : String,
+        required : true
     },
-    numberTelefon = {
-        required : true,
+    telephoneClient : {
         type : String,
-    },
-    cpf = {
         required : true,
+    },
+    emailClient : {
         type : String,
+        required : true
     },
-    adress = {
-        required : true,
+    adressClient : {
         type : String,
-    },
-    points = {
-        type: Number,
-        required : true,
-    },
-    dateRegister : {
-        type: Date.now()
+        required : true
     }
-
 }
+
+
 
 mongoose.model("client" , Client)

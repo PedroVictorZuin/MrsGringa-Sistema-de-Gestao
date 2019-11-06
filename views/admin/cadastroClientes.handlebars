@@ -1,0 +1,91 @@
+
+
+<div class="form" style="padding: 25px;">
+
+
+
+    <form action="#" id="formularioCadastroCliente">
+
+            <div class="form-row" style="padding: 25px;">
+
+                    <div class="col-md-3" style="text-align: center;">
+                    <label for="NomeCliente" >Nome</label><input id="name" class="form-control" type="text">
+                    </div>
+                    <div class="col-md-3" style="text-align: center;">
+                    <label for="sobrenomeCliente">Sobrenome</label><input id="otherName" class="form-control" type="text">
+                    </div>
+                    <div class="col-md-3" style="text-align: center;">
+                    <label for="cpfCliente">CPF/CNPJ</label><input id="cpfClient" class="form-control" type="text">
+                    </div>
+                    <div class="col-md-3" style="text-align: center;">
+                    <label for="relefoneCliente">Telefone</label><input id="telephoneClient" class="form-control" type="text">
+                    </div>
+            </div>
+            <div class="form-row" style="padding: 25px;">
+                <div class="col-md-6" style="text-align: center;">
+                <label for="emailCliente">Email</label><input id="emailClient" class="form-control" type="text">
+                </div>
+                <div class="col-md-6" style="text-align: center;">
+                <label for="enderecoCliente">Endereço</label><input id="adressClient" class="form-control" type="text">
+                </div>
+            </div>
+            <div style="align-items: center;position:relative;left: 35%;padding:10px;">
+            <button type="submit" class="btn btn-outline-success">Cadastrar ✓</button>
+            <a type="" href="/admin/" class="btn btn-outline-danger" style="margin-left: 100px;">Cancelar X</a>
+            </div>
+    </form>
+
+</div>
+<script>
+
+
+$("#formularioCadastroCliente").submit((event)=>{
+event.preventDefault()
+
+let Client = {
+    name : document.getElementById("name").value,
+    otherName : document.getElementById("otherName").value,
+    cpfClient : document.getElementById("cpfClient").value,
+    telephoneClient : document.getElementById("telephoneClient").value,
+    emailClient : document.getElementById("emailClient").value,
+    adressClient : document.getElementById("adressClient").value
+}
+
+
+$.ajax({
+    url: "http://localhost:8081/admin/cadastroClientes/newClient",
+    type : "POST",
+    data : {client : Client},
+    success : (data)=>{
+        if(data == "clientecadastrado")
+        {
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cliente Cadastrado',
+            showConfirmButton: false,
+            timer: 1500})
+
+            window.location.href = "http://localhost:8081/admin/";
+
+        }
+        else if (data == "clientenaocadastrado")
+        {
+            Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Este Cliente já existe em nosso sistema !',
+            showConfirmButton: false,
+            timer: 1500})
+        }
+                    $("#name").focus()
+    },
+    error : (err)=>{
+        console.log(err)
+    }
+})
+
+
+})
+
+</script>

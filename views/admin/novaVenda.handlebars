@@ -11,9 +11,9 @@
 
           <div>
 
-                    <div class=""  style="width: 200px;margin-left: -100px;background-color: gainsboro;padding-top:25px;border-radius : 10px;margin-top:20px;">
+                    <div class=""  style="width: 200px;margin-left: -75px;background-color: gainsboro;padding-top:25px;border-radius : 10px;margin-top:20px;">
 
-                      <form action="/novaVenda/addProduct" style="height: 90px;text-align:center;width: 200px;">
+                      <form action="#" id="formAddProduto" style="height: 90px;text-align:center;width: 200px;">
                       <label for="Referencia">Referencia</label>
                       <input type="text" name="referenceProduct" id="referenceProduct" class="form-control" style="width: 200px;">
                       <input type="submit" hidden value="">
@@ -22,23 +22,20 @@
 
                   </div>
 
-            <div class="menuHorinzontal" style="text-align:center;background-color:#F6CEF5;margin-left:-100px;width: 200px;height: 400px;">
+            <div class="menuHorinzontal" style="margin-top:-22px;text-align:center;background-color:#F6CEF5;margin-left:-75px;width:200px;height: 400px;border-radius : 10px;">
 
-              <form action="/novaVenda/finalizaVenda" method="POST" class="mt-4">
+              <form action="#" id="formFinalizaVenda" class="mt-4">
               <label for="Valor Total">Sub Total</label>
-              <input type="text" name="subTotal" id="" class="form-control mt-2" style="width: 200px;">
+              <input type="text" name="subTotal" id="subTotal" class="form-control mt-2" style="width: 200px;">
               <label for="Desconto">Desconto</label>
-              <input type="text" name="desconto" id="" class="form-control mt-2" style="width: 200px;">
+              <input type="text" name="desconto" id="desconto" class="form-control mt-2" style="width: 200px;">
               <label for="Valor Total">Cliente</label>
               <select name="clientes" id="" class="form form-control" style="width: 200px;text-align:center;">
-                <option value="Nivalda" style="text-align: center;">Nivalda</option>
-                <option value="Nivalda"style="text-align: center;">Camargo</option>
-                <option value="Nivalda"style="text-align: center;">Cleita</option>
-                <option value="Nivalda"style="text-align: center;">Bruna</option>
+                <option value="Nivalda" style="text-align: center;">Não Informado</option>
               </select>
               <label for="Valor Total"></label>
-              <input type="text" name="valorTotal" id="" class="form-control mt-2" style="width: 200px;"><br>
-              <button type="submit" class="btn btn-success">Concluir Venda ✓</button>
+              <input type="text" name="valorTotal" id="valorTotal" class="form-control mt-2" style="width: 200px;"><br>
+              <button type="submit" id="concluirVendabtn" class="btn btn-success">Concluir Venda ✓</button>
               </form>
 
             </div>
@@ -48,9 +45,9 @@
 
 
           <!--Inicio Div Da Tabela-->
-<div style="margin-left:130px;margin-top:-520px;width: 1050px;">
-            <table class="table table-light" id="myTable" style="margin-left:-15px;width: 102%;height:102%;border-radius: 10px;">
-            <h2 style="text-align: center; margin-top : 15px;" class="alert alert-success">Caixa Disponivel - Nova Venda</h2>
+<div style="margin-left:170px;margin-top:-520px;width: 1000px;">
+            <table class="table table-light" id="myTable" style="margin-left:-15px;width: 101%;height:102%;border-radius: 10px;">
+            <h2 style="margin-left: -12px;text-align: center; margin-top : 15px;" class="alert alert-success">Caixa Disponivel - Nova Venda</h2>
 
             <thead  class=""style="text-align: center;color:black;border-radius:10px;">
                 <tr>
@@ -63,24 +60,9 @@
                 <th></th>
                 </tr>
             </thead>
-        <tbody class="" style="text-align : center;">
+        <tbody class="" id="campoProdutos" style="text-align : center;">
 
-
-           
-                    <tr>
-                        <th scope="row"><!--NomeProduto--></th>
-                        <td><!--Desc Produto--></td>
-                        <td name=""><!--Referencia--></td>
-                        <td><!--Quantidade--></td>
-                        <td><!--Categoria--> Un.</td>
-                        <td><!--Valor--></td>
-                        <td><!--SubTotal--></td>
-                        <td><!--Total--></td>
-
-                    </tr>
-
-                   
-        </tbody> 
+        </tbody>
         </table>
 
 
@@ -96,13 +78,119 @@
 
 </div>
 
+
+
+
 <script>
 
+  let Sale = []
+
+let controleLinha = 0
 $(document).ready(()=>{
   $("#referenceProduct").focus()
 
 
+        document.getElementById("subTotal").value = 0
+
+$('html, body').animate({scrollTop: 65}, 'medium')
+
+
 })
+
+
+
+$("#formAddProduto").submit((event)=>{
+  event.preventDefault()
+
+
+  var ReferenciaProduto = document.getElementById("referenceProduct").value
+ 
+
+  $.ajax({
+    type:"POST",
+    url : "http://localhost:8081/admin/novaVenda/addProduct",
+    data : {referencia : ReferenciaProduto},
+    success : (data)=>{
+      if(data == "false")
+      {
+
+        Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: 'Referencia nao Encontrada',
+        showConfirmButton: false,
+        timer: 800
+          })
+
+      }
+
+      else
+      { 
+
+        
+        console.log()
+         if(Sale.indexOf(data.reference) === 0 || Sale.indexOf(data.reference) === 1){ // verifica se o produto ja existe no array e add 1 na quantidade
+             document.querySelector("#quantidade"+data.reference).value = parseFloat(document.querySelector("#quantidade"+data.reference).value) + 1
+             document.getElementById("subTotal").value = parseFloat(document.querySelector("#valorProduto"+data.reference).value) * parseFloat(document.querySelector("#quantidade"+data.reference).value)
+             document.querySelector("#valorProduto"+data.reference).value = parseFloat(document.querySelector("#valorProduto"+data.reference).value) * parseFloat(document.querySelector("#quantidade"+data.reference).value)
+         }
+         else{// caso contrario ele adiciona uma linha na tabela
+
+
+
+
+        Sale.push(data.reference)
+
+        controleLinha = controleLinha + 1
+        var LinhaTabela = '<tr id="produto'+controleLinha+'"><th scope="row" >'+data.name+'</th><td>'+data.desc+'</td><td class="referenceProduct" value="'+data.reference+'">'+data.reference+'</td><td><input type="number" id="quantidade'+data.reference+'" style="width : 80px;text-align:center;" readonly value="1"></td><td>'+data.category+'</td><td><input style="width : 100px ; text-align: center;" id="valorProduto'+data.reference+'" readonly value="'+data.sellValue+'"></td></tr>'
+        $("#myTable tbody").append(LinhaTabela)
+         document.getElementById("referenceProduct").value = ""
+
+
+
+
+        $("#referenceProduct").focus()
+
+        var subtotal = data.sellValue
+
+        document.getElementById("desconto").value = 0
+        document.getElementById("subTotal").value = parseFloat(document.getElementById("subTotal").value) + parseFloat(subtotal) * parseFloat(document.getElementById("quantidade" + data.reference).value)
+        document.getElementById("valorTotal").value = parseFloat(document.getElementById("subTotal").value) - parseFloat(document.getElementById("desconto").value) * parseFloat
+
+    
+      }
+      }
+
+    },
+    error : (err)=>{console.log("Erro ao Add produto ! ")}
+  })
+
+
+
+})
+
+
+
+$("#formFinalizaVenda").submit((event)=>{
+  event.preventDefault()
+
+
+$.ajax({
+  url : "http://localhost:8081/admin/novaVenda/endSale",
+  type : "POST",
+  data : {products : Sale},
+  success : ((data)=>{
+    console.log(data)
+  }),
+  error : ((err)=>{
+    console.log("Algo deu errado no Processo " + err)
+  })
+})
+
+
+})
+
+
 
 
 </script>

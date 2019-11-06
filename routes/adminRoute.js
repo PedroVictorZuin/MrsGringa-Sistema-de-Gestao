@@ -6,7 +6,9 @@ const Categoria = mongoose.model("category")
 const flash = require("connect-flash")
 const session = require("express-session")
 require("../model/Product")
+require("../model/Client")
 const Produto = mongoose.model("product")
+const Cliente = mongoose.model("client")
 require("../model/NewNote")
 const NovaNota = mongoose.model("note")
 const cors = require("cors")
@@ -22,13 +24,23 @@ let urlencodedParser = bodyParser.urlencoded({extended:false})
 
  
 
+
 router.get('/' , (req,res) => {
     res.render('admin/index')
 })
 
-router.get("/admin/cadastroCliente" , (req,res) => {
-    res.render("admin/")
+
+
+router.get('/listagemDeClientes' , (req,res) =>{
+    res.render('admin/listagemClientes')
 })
+
+
+router.get('/cadastroClientes' , (req,res) =>{
+    res.render('admin/cadastroClientes')
+})
+
+
 
 
 router.get("/cadastroProduto" , (req , res) => {
@@ -91,6 +103,61 @@ router.get("/novaVenda" , (req,res) =>{
 // END GET ROUTES  --------------------------------------------------------------
 // POST ROUTES ------------------------------------------------------------------
 
+
+
+
+router.post("/cadastroClientes/newClient" , (req,res)=>{
+
+    let NewClient = req.body.client
+
+    let nameComparation  = NewClient.name + " " + NewClient.otherName
+
+
+console.log(nameComparation)
+    
+    Cliente.findOne({name : NewClient.name}).then((client)=>{
+
+        if(client){
+
+            let nameResult = client.name + " " + client.otherName
+            if(nameComparation == nameResult){
+                console.log("Cliente nao liberado para cadastro , nome ja existente em nosso sistema ")
+                res.send("clientenaocadastrado")
+            }
+            else{
+                new Cliente(NewClient).save().then(()=>{
+                    res.send("clientecadastrado")
+                }).catch((err)=>{
+                  
+                })
+            }
+        }
+    })
+
+
+
+    
+})
+
+
+router.post("/novaVenda/addProduct",urlencodedParser , (req,res)=>{
+        const envioCliente = req.body.referencia
+
+    Produto.findOne({reference : envioCliente}).then((productSale)=>{
+        if(productSale){
+            res.send(productSale)
+        }else{
+            res.send("false")
+        }
+
+
+
+
+    }).catch((err)=>{
+        console.log("Nao encontramos produto com esta referencia ! ")
+    })
+
+})
 
 
 router.post("/listarProdutos/saidadoproduto/exit" , (req,res)=>{
@@ -169,8 +236,60 @@ router.post("/lancarProdutoEmNota/success/onebyone", urlencodedParser , (req,res
 
     const data = req.body;
 
-    console.log(data)
 
+  
+
+    console.log(data.ref)
+
+    Produto.findOne({reference : data.ref}).then((produ)=>{
+
+        if(produ){
+
+            //bloco de comparacao do nome do produto !
+            if(data.name != produ.name)
+            {
+                //Houve Divergencia , esta referencia esta cadastrada em outro produto !
+                res.json({msg : false})
+            }
+
+            else {  
+                // Produto Encontrado , Vamos dar Entrada nele  
+                res.json({msg : "sucessoEntradaProduto"})
+
+                var QuantidadeEntradaNota = produ.quantity + parseInt(data.qtd)
+
+
+                produ.quantity = QuantidadeEntradaNota
+                produ.save()
+            }
+
+        }
+        else
+        {
+            //Produto nao encontrado , Vamos cadastrar um novo ...
+            res.json({msg : "intermade"})
+            
+            const NewProduct = {
+                name : data.name,
+                desc : data.desc,
+                reference : data.ref,
+                color : data.color,
+                quantity : data.qtd , 
+                category : data.category,
+                buyValue : parseFloat(data.buyValue) ,
+                sellValue : parseFloat(data.saleValue)
+            }
+            Produto(NewProduct).save();
+        }
+    })
+
+
+    let NewProduct = {
+        name : data.name
+    }
+
+
+  
 })
 
 
@@ -227,6 +346,28 @@ router.post("/entradaemProdutos/entrada" , (req,res) =>{
 
 
 })
+
+
+router.post("/novaVenda/endSale", urlencodedParser , (req,res)=>{
+    let Sale = req.body.products
+    let TotalSale = []
+
+    
+    for(let i = 0 ; i < Sale.length ; i++){
+        Produto.findOne({reference : Sale[i]}).then((produ)=>{
+            
+            console.log(produ)
+
+        }).catch((err)=>{
+            console.log("Produto Nao Encontrado " + err)
+        })
+    }
+
+
+
+
+})
+
 
 router.post("/entradaemProdutos/new" , (req,res)=>{
 
